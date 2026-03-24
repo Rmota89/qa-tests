@@ -1,0 +1,13 @@
+meta {
+  name: Healthcheck
+  type: http
+  seq: 1
+}
+get {
+  url: http://my-microservice-svc/items
+  body: none
+  auth: none
+}
+assert {
+  res.status: eq 200
+}
