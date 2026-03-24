@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { MongoClient, ObjectId } = require('mongodb');
 
-const API_URL = 'http://my-microservice-svc/items'\;
+const API_URL = 'http://my-microservice-svc/items';
 const MONGO_URI = 'mongodb://mongodb-svc:27017/mydb';
 
 test('Test 1: Check 200 OK', async ({ request }) => {
