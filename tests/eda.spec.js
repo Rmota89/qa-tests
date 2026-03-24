@@ -1,8 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const { MongoClient } = require('mongodb');
 
-const PRODUCER_URL = 'http://producer-svc/orders'\;
-const CONSUMER_URL = 'http://consumer-svc/processed-orders'\;
+const PRODUCER_URL = 'http://producer-svc/orders';
+const CONSUMER_URL = 'http://consumer-svc/processed-orders';
 const MONGO_URI = 'mongodb://mongodb-svc:27017/mydb';
 
 // .serial ensures tests run in exact order so we can pass the orderId between them!
