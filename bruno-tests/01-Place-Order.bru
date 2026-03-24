@@ -1,0 +1,22 @@
+meta {
+  name: Place Order (Producer)
+  type: http
+  seq: 2
+}
+post {
+  url: http://producer-svc/orders
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "carModel": "Mercedes-AMG ONE"
+  }
+}
+tests {
+  test("Producer accepted the order", function() {
+    expect(res.status).to.equal(200);
+    // Save the ID to memory so the next test can look for it!
+    bru.setVar("orderId", res.body.order.orderId);
+  });
+}

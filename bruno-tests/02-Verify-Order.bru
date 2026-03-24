@@ -1,0 +1,29 @@
+meta {
+  name: Verify Order (Consumer)
+  type: http
+  seq: 3
+}
+get {
+  url: http://consumer-svc/processed-orders
+  body: none
+  auth: none
+}
+script:pre-request {
+  // Force Bruno to wait 2 seconds for RabbitMQ to process the message!
+  await new Promise(r => setTimeout(r, 2000));
+}
+tests {
+  test("Consumer processed the order successfully", function() {
+    expect(res.status).to.equal(200);
+    
+    const targetOrderId = bru.getVar("orderId");
+    const orders = res.body;
+    
+    // Search the database response for our exact order
+    const myOrder = orders.find(o => o.orderId === targetOrderId);
+    
+    expect(myOrder).to.not.be.undefined;
+    expect(myOrder.status).to.equal("PROCESSED");
+    expect(myOrder.carModel).to.equal("Mercedes-AMG ONE");
+  });
+}
